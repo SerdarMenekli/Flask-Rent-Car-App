@@ -1,0 +1,105 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+  <!-- blog section -->
+
+  <section class="blog_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Our Latest Blog
+        </h2>
+        <p>
+          It is a long established fact that a reader will be distracted by the
+        </p>
+      </div>
+    </div>
+    <div class="blog_container">
+      <div class="layout_padding2-top">
+        <div class="carousel-wrap ">
+          <div class="owl-carousel">
+            <div class="item">
+              <div class="box">
+                <div class="date-box">
+                  <h6>
+                    04 Nov 2019
+                  </h6>
+                </div>
+                <div class="img-box">
+                  <img src="{{ url_for('static', filename='images/b-1.jpg') }}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Vintage
+                  </h5>
+                  <p>
+                    It is a long established fact that a reader will be distracted by the readable The point of using Lorem </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="box">
+                <div class="date-box">
+                  <h6>
+                    04 Nov 2019
+                  </h6>
+                </div>
+                <div class="img-box">
+                  <img src="{{ url_for('static', filename='images/b-2.jpg') }}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Steering wheels
+                  </h5>
+                  <p>
+                    It is a long established fact that a reader will be distracted by the readable The point of using Lorem </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="box">
+                <div class="date-box">
+                  <h6>
+                    04 Nov 2019
+                  </h6>
+                </div>
+                <div class="img-box">
+                  <img src="{{ url_for('static', filename='images/b-3.jpg') }}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Buick Car
+                  </h5>
+                  <p>
+                    It is a long established fact that a reader will be distracted by the readable The point of using Lorem </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="box">
+                <div class="date-box">
+                  <h6>
+                    04 Nov 2019
+                  </h6>
+                </div>
+                <div class="img-box">
+                  <img src="{{ url_for('static', filename='images/b-2.jpg') }}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    Steering wheels
+                  </h5>
+                  <p>
+                    It is a long established fact that a reader will be distracted by the readable The point of using Lorem </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end blog section -->
+{% endblock content %}

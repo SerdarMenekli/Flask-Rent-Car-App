@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="top-pad">
+    <form method="POST" action="{{ url_for('auth.register') }}" role="form">
+        {{ form.csrf_token }}
+        <div class="form-group">{{ form.username.label }}: {{ form.username() }}</div>
+        <div class="form-group">{{ form.password.label }}: {{ form.password() }}</div>
+        <div class="form-group">{{ form.confirm.label }}: {{ form.confirm() }}</div>
+        <div class="form-group">{{ form.email.label }}: {{ form.email() }}</div>
+        <div class="form-group">{{ form.full_name.label }}: {{ form.full_name() }}</div>
+        <div class="form-group">{{ form.phone_number.label }}: {{ form.phone_number() }}</div>
+        <div class="form-group">{{ form.address.label }}: {{ form.address() }}</div>
+        <div class="form-group">{{ form.date_of_birth.label }}: {{ form.date_of_birth() }}</div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+{% endblock %}
