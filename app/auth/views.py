@@ -35,6 +35,7 @@ def register():
             return render_template("register.html", form=form)
         user = User(username, password)
         db.session.add(user)
+        db.session.commit()
         
         customer = Customer(user_id=user.id, full_name=form.full_name.data, phone_number=form.phone_number.data, address=form.address.data, date_of_birth=form.date_of_birth.data)
         db.session.add(customer)

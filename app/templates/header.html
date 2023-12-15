@@ -16,7 +16,7 @@
                   <h3>Hey {{ current_user.username }}!!</h3>
                   <a href="{{ url_for('auth.logout') }}">Click here to logout</a>
               {% else %}
-                  Click here to <a href="{{ url_for('auth.login') }}">login</a> or <a href="{{ url_for('auth.register') }}">register</a>
+                  <a href="{{ url_for('auth.login') }}" class="mr-3">login</a> <a href="{{ url_for('auth.register') }}">register</a>
               {% endif %}
               <!--<a href="{{url_for('auth.login')}}">Login</a>-->
             </div>
