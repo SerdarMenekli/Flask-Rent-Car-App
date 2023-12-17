@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="top-pad">
+    
+    <form method="POST" action="{{ url_for('auth.manage_account') }}" role="form">
+        {{ form1.csrf_token }}
+        <fieldset>
+        <legend>Change account information</legend>
+        <div class="form-group">{{ form1.password.label }}: {{ form1.password() }}</div>
+        <div class="form-group">{{ form1.username.label }}: {{ form1.username(value=user.username) }}</div>
+        <div class="form-group">{{ form1.new_password.label }}: {{ form1.new_password() }}</div>
+        <div class="form-group">{{ form1.confirm.label }}: {{ form1.confirm() }}</div>
+        <div class="form-group">{{ form1.email.label }}: {{ form1.email(value=user.email) }}</div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        </fieldset>
+    </form>
+    
+    <form method="POST" action="{{ url_for('auth.manage_personal') }}" role="form">
+        {{ form2.csrf_token }}
+        <fieldset>
+        <legend>Change personal information</legend>
+        <div class="form-group">{{ form2.full_name.label }}: {{ form2.full_name(value=customer.full_name) }}</div>
+        <div class="form-group">{{ form2.phone_number.label }}: {{ form2.phone_number(value=customer.phone_number) }}</div>
+        <div class="form-group">{{ form2.address.label }}: {{ form2.address(value=customer.address) }}</div>
+        <div class="form-group">{{ form2.date_of_birth.label }}: {{ form2.date_of_birth(value=customer.date_of_birth) }}</div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
