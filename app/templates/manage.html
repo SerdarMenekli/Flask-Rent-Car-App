@@ -1,6 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="top-pad">
+<div class="container mt-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-6">
+            <form method="POST" action="{{ url_for('auth.manage_account') }}" role="form" class="mb-5">
+                {{ form1.csrf_token }}
+                <fieldset>
+                <legend>Change account information</legend>
+                <div class="mb-3">{{ form1.password.label(class="form-label") }}: {{ form1.password(class="form-control") }}</div>
+                <div class="mb-3">{{ form1.username.label(class="form-label") }}: {{ form1.username(class="form-control", value=user.username) }}</div>
+                <div class="mb-3">{{ form1.new_password.label(class="form-label") }}: {{ form1.new_password(class="form-control") }}</div>
+                <div class="mb-3">{{ form1.confirm.label(class="form-label") }}: {{ form1.confirm(class="form-control") }}</div>
+                <div class="mb-3">{{ form1.email.label(class="form-label") }}: {{ form1.email(class="form-control", value=user.email) }}</div>
+                <button type="submit" class="btn background_color">Submit</button>
+                </fieldset>
+            </form>
+            
+            <form method="POST" action="{{ url_for('auth.manage_personal') }}" role="form">
+                {{ form2.csrf_token }}
+                <fieldset>
+                <legend>Change personal information</legend>
+                <div class="mb-3">{{ form2.full_name.label(class="form-label") }}: {{ form2.full_name(class="form-control", value=customer.full_name) }}</div>
+                <div class="mb-3">{{ form2.phone_number.label(class="form-label") }}: {{ form2.phone_number(class="form-control", value=customer.phone_number) }}</div>
+                <div class="mb-3">{{ form2.address.label(class="form-label") }}: {{ form2.address(class="form-control", value=customer.address) }}</div>
+                <div class="mb-3">{{ form2.date_of_birth.label(class="form-label") }}: {{ form2.date_of_birth(class="form-control", value=customer.date_of_birth) }}</div>
+                <button type="submit" class="btn background_color">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div> 
+</div>
+{# <div class="top-pad">
     
     <form method="POST" action="{{ url_for('auth.manage_account') }}" role="form">
         {{ form1.csrf_token }}
@@ -26,5 +56,5 @@
         <button type="submit" class="btn btn-default">Submit</button>
         </fieldset>
     </form>
-</div>
+</div> #}
 {% endblock %}

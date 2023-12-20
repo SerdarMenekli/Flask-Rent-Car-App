@@ -1,5 +1,6 @@
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins",
+ sans-serif;
   color: #0c0c0c;
   background-color: #ffffff;
 }
@@ -85,14 +86,15 @@ body {
   padding: 0px 25px;
   color: #fefeff;
   text-align: center;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto",
+ sans-serif;
 }
 
 .custom_menu-btn {
   z-index: 9;
   position: absolute;
   right: 15px;
-  top: 14px;
+  top: 7px;
 }
 
 .custom_menu-btn button {
@@ -300,7 +302,8 @@ a:focus {
 }
 
 .slider_section .slider_container .detail_container .detail-box h1 {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans",
+ sans-serif;
   text-transform: uppercase;
   font-weight: bold;
   color: #fefdfc;
@@ -873,7 +876,8 @@ a:focus {
 }
 
 .client_section {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans",
+ sans-serif;
 }
 
 .client_section .heading_container {
@@ -1136,3 +1140,12 @@ a:focus {
   color: #fefdfc;
 }
 /*# sourceMappingURL=style.css.map */
+
+.background_color{
+  background-color: #240a5e!important;
+  color: #fefdfc!important;
+}
+
+.content{
+  min-height: 82.5vh;
+}

@@ -13,7 +13,7 @@
             <div class="user_option">
               {% if current_user.is_authenticated %}
                   {# <h3>Hey {{ session.username }}!!</h3> #}
-                  <h3>Hey {{ current_user.username }}!!</h3>
+                  <h3 class="background_color">Hey {{ current_user.username }}!</h3>
                   <a href="{{ url_for('auth.logout') }}">Click here to logout</a>
               {% else %}
                   <a href="{{ url_for('auth.login') }}" class="mr-3">login</a> <a href="{{ url_for('auth.register') }}">register</a>
@@ -30,6 +30,7 @@
             <div id="myNav" class="overlay">
               <div class="overlay-content">
                 <a href="{{url_for('rent4u.index')}}">Home</a>
+                <a href="{{url_for('auth.manage')}}">Manage Account</a>
                 <a href="{{url_for('rent4u.about')}}">About</a>
                 <a href="{{url_for('rent4u.car')}}">Cars</a>
                 <a href="{{url_for('rent4u.blog')}}">Blog</a>

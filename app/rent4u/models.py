@@ -1,5 +1,6 @@
 from datetime import datetime
 from app import db
+from flask_wtf import FlaskForm
 
 class Customer(db.Model):
     __tablename__ = 'customer'
@@ -169,3 +170,6 @@ class Invoice(db.Model):
         self.payment_status = payment_status
         self.issued_date = issued_date
         self.due_date = due_date
+        
+class SearchForm(FlaskForm):
+    pass
