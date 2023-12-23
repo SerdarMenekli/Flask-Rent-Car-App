@@ -31,6 +31,6 @@ from app.rent4u.models import SearchForm
 
 @rent4u.route('/search', methods=['POST'])
 def search():
-    form= SearchForm()
+    form = SearchForm()
     # return render_template('index.html',is_home_page=True, form=form)
     return redirect(url_for('rent4u.index'))

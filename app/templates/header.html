@@ -30,12 +30,16 @@
             <div id="myNav" class="overlay">
               <div class="overlay-content">
                 <a href="{{url_for('rent4u.index')}}">Home</a>
+
+                {% if current_user.is_authenticated %}
                 <a href="{{url_for('auth.manage')}}">Manage Account</a>
+                {% endif %}
+                
                 <a href="{{url_for('rent4u.about')}}">About</a>
                 <a href="{{url_for('rent4u.car')}}">Cars</a>
                 <a href="{{url_for('rent4u.blog')}}">Blog</a>
                 <a href="{{url_for('rent4u.contact')}}">Contact Us</a>
-                <a href="#">Login</a>
+                {# <a href="#">Login</a> #}
               </div>
             </div>
           </div>
