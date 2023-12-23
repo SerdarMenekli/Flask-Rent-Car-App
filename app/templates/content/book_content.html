@@ -1,0 +1,42 @@
+<section class="book_section">
+    <div class="form_container">
+      <form method="POST" action="{{ url_for('rent4u.search') }}" role="form">
+        {{ form.csrf_token }}
+        <div class="form-row">
+          <div class="col-lg-8">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="parkingName">Pick Up Locaion</label>
+                <input type="text" class="form-control" placeholder="acb ">
+              </div>
+              <div class="col-md-6">
+                <label for="parkingNumber">Drop Location</label>
+                <input type="text" class="form-control" placeholder="acb ">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="parkingName">Pick Up Date</label>
+                <input type="date" class="form-control" value="2023-12-20">
+              </div>
+              <div class="col-md-6">
+                <label for="parkingNumber">Return Date</label>
+                <input type="date" class="form-control" value="2023-12-27">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="btn-container">
+              <button type="submit" class="">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="img-box">
+      <img src="{{ url_for('static', filename='images/book-car.png') }}" alt="">
+    </div>
+  </section>

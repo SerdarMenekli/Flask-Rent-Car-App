@@ -2,7 +2,8 @@
 
 {% block content %}
   <!-- book section -->
-  <section class="book_section">
+  {% include "content/book_content.html" %}
+  {# <section class="book_section">
     <div class="form_container">
       <form method="POST" action="{{ url_for('rent4u.search') }}" role="form">
         {{ form.csrf_token }}
@@ -43,11 +44,12 @@
     <div class="img-box">
       <img src="{{ url_for('static', filename='images/book-car.png') }}" alt="">
     </div>
-  </section>
+  </section> #}
 
   <!-- end book section -->
 
-  <!-- car section -->
+  {% include "content/car_content.html" %}
+  {# <!-- car section -->
 
   <section class="car_section layout_padding2-top layout_padding-bottom">
     <div class="container">
@@ -114,36 +116,6 @@
 
   <!-- end car section -->
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding-bottom">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-7 px-0">
-          <div class="img-box">
-            <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="">
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-3">
-          <div class="detail-box">
-            <h2>
-              About Our Cars
-            </h2>
-            <p>
-              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem
-            </p>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end about section -->
-
-
   <!-- best section -->
 
   <section class="best_section">
@@ -169,7 +141,6 @@
   <!-- end best section -->
 
   <!-- rent section -->
-
   <section class="rent_section layout_padding">
     <div class="container">
       <div class="rent_container">
@@ -241,12 +212,17 @@
       </div>
     </div>
   </section>
+  <!-- end rent section --> #}
 
+  <!-- about section -->
 
-  <!-- end rent section -->
+  {% include "content/about_content.html" %}
+
+  <!-- end about section -->
 
   <!-- blog section -->
-
+  {% include "content/blog_content.html" %}
+  <!--
   <section class="blog_section layout_padding">
     <div class="container">
       <div class="heading_container">
@@ -343,12 +319,12 @@
       </div>
     </div>
   </section>
-
+  -->
   <!-- end blog section -->
 
   <!-- us section -->
-
-  <section class="us_section">
+  {% include "content/us_content.html" %}
+  {# <section class="us_section">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -408,17 +384,17 @@
         </a>
       </div>
     </div>
-  </section>
+  </section> #}
 
   <!-- end us section -->
 
   <!-- client section -->
-
-  <section class="client_section layout_padding">
+  {% include "content/client_content.html" %}
+  {# <section class="client_section layout_padding">
     <div class="container">
       <div class="heading_container">
         <h2>
-          What Is say Customer
+          What Do Customers Say?
         </h2>
         <p>
           It is a long established fact that a reader will be distracted by the
@@ -524,114 +500,20 @@
       </div>
 
     </div>
-  </section>
+  </section> #}
 
   <!-- end client section -->
 
   <!-- contact section -->
 
-  <section class="contact_section layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Request A call back
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <div class="form_container">
-            <form>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="inputName4" placeholder="Name ">
-                </div>
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="inputSubject4" placeholder="Phone">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col">
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email id">
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="inputMessage" placeholder="Message">
-              </div>
-              <div class="d-flex justify-content-center">
-                <button type="submit" class="">Send</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="contact_items">
-
-        <a href="">
-          <div class="img-box">
-            <img src="{{ url_for('static', filename='images/location.png') }}" alt="">
-          </div>
-          <h6>
-            Loram Ipusum ari
-            lo elisant na
-          </h6>
-        </a>
-        <a href="">
-          <div class="img-box">
-            <img src="{{ url_for('static', filename='images/call.png') }}" alt="">
-          </div>
-          <h6>
-            (+12 1234456789)
-          </h6>
-        </a>
-        <a href="">
-          <div class="img-box">
-            <img src="{{ url_for('static', filename='images/mail.png') }}" alt="">
-          </div>
-          <h6>
-            demo@gmail.com
-          </h6>
-        </a>
-
-      </div>
-      <div class="social_container">
-        <div class="social-box">
-          <div>
-            <a href="">
-              <img src="{{ url_for('static', filename='images/fb.png') }}" alt="">
-            </a>
-          </div>
-          <div>
-            <a href="">
-              <img src="{{ url_for('static', filename='images/twitter.png') }}" alt="">
-            </a>
-          </div>
-          <div>
-            <a href="">
-              <img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="">
-            </a>
-          </div>
-          <div>
-            <a href="">
-              <img src="{{ url_for('static', filename='images/insta.png') }}" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {% include "content/contact_content.html" %}
 
   <!-- end contact section -->
 
   <!-- map section -->
 
-  <section class="map_section">
-    <!-- map section -->
-    <div class="map_container">
-      <div class="map-responsive">
-        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
-      </div>
-    </div>
-    <!-- end map section -->
-  </section>
+  {% include "content/map_content.html" %}
+  <!-- end map section -->
+  
 
 {% endblock content %}
