@@ -1,7 +1,6 @@
 <section class="book_section">
     <div class="form_container">
-      <form method="POST" action="{{ url_for('rent4u.search') }}" role="form">
-        {{ form.csrf_token }}
+      <form method="GET" action="{{ url_for('rent4u.search') }}" role="form">
         <div class="form-row">
           <div class="col-lg-8">
             <div class="form-row">

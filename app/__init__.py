@@ -18,6 +18,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 csrf = CSRFProtect(app)
 csrf.init_app(app)
 app.secret_key = 'some_random_key'
@@ -41,6 +45,7 @@ admin.add_view(ModelView(Rental, db.session))
 admin.add_view(ModelView(Location, db.session))
 admin.add_view(ModelView(Reservation, db.session))
 admin.add_view(ModelView(Invoice, db.session))
+
 
 from app.auth.views import auth
 app.register_blueprint(auth)

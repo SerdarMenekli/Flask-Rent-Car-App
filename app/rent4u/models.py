@@ -1,7 +1,10 @@
 from datetime import datetime
+
 from app import db
 from flask_wtf import FlaskForm
-
+from wtforms import StringField, IntegerField, SelectField, FloatField, TextAreaField
+from flask_wtf.file import FileField, FileAllowed
+from wtforms.validators import DataRequired, NumberRange
 class Customer(db.Model):
     __tablename__ = 'customer'
 
@@ -25,34 +28,40 @@ class Car(db.Model):
     __tablename__ = 'car'
 
     id = db.Column(db.Integer, primary_key=True)
-    car_type = db.Column(db.String(50))
+    type = db.Column(db.String(50))
     transmission = db.Column(db.String(20))
     seats = db.Column(db.Integer)
+    doors = db.Column(db.Integer)
+    luggage = db.Column(db.Integer)
     brand = db.Column(db.String(50))
     model = db.Column(db.String(50))
-    year = db.Column(db.Integer)
-    color = db.Column(db.String(20))
-    license_plate = db.Column(db.String(15), unique=True, nullable=False)
+    # year = db.Column(db.Integer)
+    # color = db.Column(db.String(20))
+    # license_plate = db.Column(db.String(15), unique=True, nullable=False)
     availability = db.Column(db.Boolean, default=True)
     current_location = db.Column(db.String(255))
     rental_rate = db.Column(db.Float)
     description = db.Column(db.Text)
+    image_filename = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-
-    def __init__(self, car_type, transmission, seats, brand, model, year, color, license_plate, availability, current_location, rental_rate, description):
-        self.car_type = car_type
+    
+    def __init__(self, type, transmission, seats, doors, luggage, brand, model, availability, current_location, rental_rate, description, image_filename):
+        self.type = type
         self.transmission = transmission
         self.seats = seats
+        self.doors = doors
+        self.luggage = luggage
         self.brand = brand
         self.model = model
-        self.year = year
-        self.color = color
-        self.license_plate = license_plate
+        # self.year = year
+        # self.color = color
+        # self.license_plate = license_plate
         self.availability = availability
         self.current_location = current_location
         self.rental_rate = rental_rate
         self.description = description
+        self.image_filename = image_filename
   
   
 """   
@@ -172,4 +181,29 @@ class Invoice(db.Model):
         self.due_date = due_date
         
 class SearchForm(FlaskForm):
-    pass
+    type = SelectField('Type', choices=[('sedan', 'Sedan'), ('suv', 'SUV'), ('truck', 'Truck'), ('mini', 'Mini'), ('other', 'Other')])
+    transmission = SelectField('Transmission', choices=[('automatic', 'Automatic'), ('manual', 'Manual')])
+    seats = IntegerField('Number of Seats', validators=[NumberRange(min=2)])
+    luggage = IntegerField('Luggage Capacity', validators=[NumberRange(min=1)])
+    rental_rate_min = FloatField('Min Price', validators=[NumberRange(min=0)])
+    rental_rate_max = FloatField('Max Price', validators=[NumberRange(min=100)])
+
+class CarForm(FlaskForm):
+    type = SelectField('Type', choices=[('sedan', 'Sedan'), ('suv', 'SUV'), ('truck', 'Truck'), ('mini', 'Mini'), ('other', 'Other')], validators=[DataRequired()])
+    transmission = SelectField('Transmission', choices=[('automatic', 'Automatic'), ('manual', 'Manual')], validators=[DataRequired()])
+    seats = IntegerField('Number of Seats', validators=[DataRequired(), NumberRange(min=2)])
+    doors = IntegerField('Number of Doors', validators=[DataRequired(), NumberRange(min=3)])
+    luggage = IntegerField('Luggage Capacity', validators=[DataRequired(), NumberRange(min=1)])
+    brand = StringField('Brand', validators=[DataRequired()])
+    model = StringField('Model', validators=[DataRequired()])
+    # year = IntegerField('Year', validators=[DataRequired(), NumberRange(min=1900, max=2100)])
+    # color = StringField('Color', validators=[DataRequired()])
+    # license_plate = StringField('License Plate', validators=[DataRequired()])
+    
+    
+    
+    availability = SelectField('Availability', choices=[('available', 'Available'), ('unavailable', 'Unavailable')], validators=[DataRequired()])
+    current_location = StringField('Current Location', validators=[DataRequired()])
+    rental_rate = FloatField('Rental Rate per Day', validators=[DataRequired(), NumberRange(min=0)])
+    description = TextAreaField('Description')
+    image = FileField('Car Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only (JPG, JPEG, PNG) allowed!')], render_kw={"accept": "image/*"})

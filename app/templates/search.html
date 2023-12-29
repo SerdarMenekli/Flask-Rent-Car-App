@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container col-md-8 mt-5">
+        <form method="GET" action="{{ url_for('rent4u.search') }}" role="form" class="row">
+            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.type.label(class="form-label") }}{{ form.type(class="form-select ") }}</div>
+            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.transmission.label(class="form-label") }}{{ form.transmission(class="form-select") }}</div>
+            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.seats.label(class="form-label") }}{{ form.seats(class="form-control") }}</div>
+            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.luggage.label(class="form-label") }}{{ form.luggage(class="form-control") }}</div>
+            <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_min.label(class="form-label") }}{{ form.rental_rate_min(class="form-control") }}</div>
+            <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_max.label(class="form-label") }}{{ form.rental_rate_max(class="form-control") }}</div>
+            <div class="mb-3 col-sm-2 d-flex align-items-end"><button type="submit" class="btn background_color">Submit</button></div>
+        </form>
+        {% for car in cars %}
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="card-body col-md-4 text-center">
+                            {% if car.image_filename %}
+                                <img src="{{ url_for('rent4u.car_image', filename=car.image_filename) }}" class="img-fluid rounded" alt="Car Image" style="object-fit: contain; height: 100%">
+                            {% else %}
+                                <img src="" class="img-fluid rounded" alt="Placeholder Image">
+                            {% endif %}
+                        </div>
+                        <div class="card-body col-md-4">
+                            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                            <p class="card-text"><strong>Type:</strong> {{ car.type }}</p>
+                            <p class="card-text"><strong>Transmission:</strong> {{ car.transmission }}</p>
+                            <p class="card-text"><strong>Seats:</strong> {{ car.seats }}</p>
+                            <p class="card-text"><strong>Doors:</strong> {{ car.doors }}</p>
+                        </div>
+                        <div class="card-body col-md-4">
+                            <p class="card-text"><strong>Luggage:</strong> {{ car.luggage }}</p>
+                            <p class="card-text"><strong>Availability:</strong> {{ "Available" if car.availability else "Unavailable" }}</p>
+                            <p class="card-text"><strong>Current Location:</strong> {{ car.current_location }}</p>
+                            <p class="card-text"><strong>Rental Rate per Day:</strong> ${{ car.rental_rate }}</p>
+                            <p class="card-text"><strong>Description:</strong> {{ car.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            
+        {% endfor %}
+    </div>
+{% endblock content %}
