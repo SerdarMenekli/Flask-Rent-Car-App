@@ -6,21 +6,21 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="parkingName">Pick Up Locaion</label>
-                <input type="text" class="form-control" placeholder="acb ">
+                <input type="text" class="form-control" placeholder="Paris ">
               </div>
               <div class="col-md-6">
                 <label for="parkingNumber">Drop Location</label>
-                <input type="text" class="form-control" placeholder="acb ">
+                <input type="text" class="form-control" placeholder="Orleans ">
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6">
                 <label for="parkingName">Pick Up Date</label>
-                <input type="date" class="form-control" value="2023-12-20">
+                <input type="date" class="form-control" id="pickUpDate" value="2023-12-20">
               </div>
               <div class="col-md-6">
                 <label for="parkingNumber">Return Date</label>
-                <input type="date" class="form-control" value="2023-12-27">
+                <input type="date" class="form-control" id="returnDate" value="2023-12-27">
               </div>
             </div>
           </div>
@@ -35,7 +35,20 @@
 
       </form>
     </div>
+    
     <div class="img-box">
       <img src="{{ url_for('static', filename='images/book-car.png') }}" alt="">
     </div>
+
+    <script>
+      var currentDate = new Date();
+    
+      var pickUpDateInput = document.getElementById('pickUpDate');
+      pickUpDateInput.value = currentDate.toISOString().split('T')[0];
+
+      var returnDate = new Date(currentDate);
+      returnDate.setDate(currentDate.getDate() + 7);
+      var returnDateInput = document.getElementById('returnDate');
+      returnDateInput.value = returnDate.toISOString().split('T')[0];
+    </script>
   </section>

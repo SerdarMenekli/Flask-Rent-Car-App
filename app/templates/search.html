@@ -2,16 +2,22 @@
 
 {% block content %}
     <div class="container col-md-8 mt-5">
-        <form method="GET" action="{{ url_for('rent4u.search') }}" role="form" class="row">
-            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.type.label(class="form-label") }}{{ form.type(class="form-select ") }}</div>
-            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.transmission.label(class="form-label") }}{{ form.transmission(class="form-select") }}</div>
-            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.seats.label(class="form-label") }}{{ form.seats(class="form-control") }}</div>
-            <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.luggage.label(class="form-label") }}{{ form.luggage(class="form-control") }}</div>
-            <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_min.label(class="form-label") }}{{ form.rental_rate_min(class="form-control") }}</div>
-            <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_max.label(class="form-label") }}{{ form.rental_rate_max(class="form-control") }}</div>
-            <div class="mb-3 col-sm-2 d-flex align-items-end"><button type="submit" class="btn background_color">Submit</button></div>
+        <form method="GET" action="{{ url_for('rent4u.search') }}" role="form" >
+            <div class="row">
+                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.type.label(class="form-label") }}{{ form.type(class="form-select") }}</div>
+                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.transmission.label(class="form-label") }}{{ form.transmission(class="form-select") }}</div>
+                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.seats.label(class="form-label") }}{{ form.seats(class="form-control") }}</div>
+                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.luggage.label(class="form-label") }}{{ form.luggage(class="form-control") }}</div>
+                <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_min.label(class="form-label") }}{{ form.rental_rate_min(class="form-control") }}</div>
+                <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_max.label(class="form-label") }}{{ form.rental_rate_max(class="form-control") }}</div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-sm-2 d-flex align-items-end float-right"><button type="submit" class="btn background_color">Submit</button></div>
+            </div>
+            
         </form>
-        {% for car in cars %}
+        <div>total of {{cars.total}}  results</div>
+        {% for car in cars.items %}
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="card-body col-md-4 text-center">
@@ -26,18 +32,54 @@
                             <p class="card-text"><strong>Type:</strong> {{ car.type }}</p>
                             <p class="card-text"><strong>Transmission:</strong> {{ car.transmission }}</p>
                             <p class="card-text"><strong>Seats:</strong> {{ car.seats }}</p>
-                            <p class="card-text"><strong>Doors:</strong> {{ car.doors }}</p>
+                            
                         </div>
                         <div class="card-body col-md-4">
-                            <p class="card-text"><strong>Luggage:</strong> {{ car.luggage }}</p>
+                            <p class="card-text"><strong>Doors:</strong> {{ car.doors }}</p>
+                            <p class="card-text"><strong>Luggage Capacity:</strong> {{ car.luggage }}</p>
                             <p class="card-text"><strong>Availability:</strong> {{ "Available" if car.availability else "Unavailable" }}</p>
-                            <p class="card-text"><strong>Current Location:</strong> {{ car.current_location }}</p>
+                            <!-- <p class="card-text"><strong>Current Location:</strong> {{ car.current_location }}</p> -->
                             <p class="card-text"><strong>Rental Rate per Day:</strong> ${{ car.rental_rate }}</p>
-                            <p class="card-text"><strong>Description:</strong> {{ car.description }}</p>
+                            <!-- <p class="card-text"><strong>Description:</strong> {{ car.description }}</p> -->
                         </div>
                     </div>
                 </div>
             
         {% endfor %}
+
+        {#{% if cars.has_prev %} 
+        <a href="{{ url_for(request.endpoint, page=cars.prev_num) }}"> 
+            {{"<< Previous Page"}} 
+        </a>
+        {% else %} 
+            {{"<< Previous Page"}} 
+        {% endif %} | 
+        {% if cars.has_next %} 
+            <a href="{{ url_for(request.endpoint, page=cars.next_num) }}"> 
+                {{"Next page >>"}} 
+            </a> 
+        {% else %}
+            {{"Next page >>"}} 
+        {% endif %}#}
+        <div class="text-center mb-3">
+            {% if cars.has_prev %}
+
+            {% set args = request.args.to_dict() %}
+            {% set _ = args.update({'page': cars.prev_num}) %}
+            <a href="{{ url_for(request.endpoint, **args) }}" class="btn background_color">&lt;</a>
+
+            {% endif %}
+
+            Page {{ cars.page }} of {{ cars.pages }}
+
+            {% if cars.has_next %}
+
+                {% set args = request.args.to_dict() %}
+                {% set _ = args.update({'page': cars.next_num}) %}
+                <a href="{{ url_for(request.endpoint, **args) }}" class="btn background_color">&gt;</a>
+
+            {% endif %}
+        </div>
+        
     </div>
 {% endblock content %}

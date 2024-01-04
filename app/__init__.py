@@ -8,9 +8,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 
-
 app = Flask(__name__)
-
 
 
 db_path = os.path.join(app.root_path, 'database', 'database.db')
@@ -33,14 +31,15 @@ login_manager.login_view = 'auth.login'
 
 
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap4')
-class UserAdminView(ModelView):
-    column_exclude_list = ['pwdhash']
+# class UserAdminView(ModelView):
+#     column_exclude_list = ['pwdhash']
     
+from app.auth import UserModelView, CustomerModelView, CarModelView
 from app.auth.models import User
 from app.rent4u.models import Customer, Car, Rental, Location, Reservation, Invoice
-admin.add_view(UserAdminView(User, db.session))
-admin.add_view(ModelView(Customer, db.session))
-admin.add_view(ModelView(Car, db.session))
+admin.add_view(UserModelView(User, db.session))
+admin.add_view(CustomerModelView(Customer, db.session))
+admin.add_view(CarModelView(Car, db.session))
 admin.add_view(ModelView(Rental, db.session))
 admin.add_view(ModelView(Location, db.session))
 admin.add_view(ModelView(Reservation, db.session))

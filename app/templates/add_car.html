@@ -6,7 +6,7 @@
             <h2 class="mb-4">Add a New Car</h2>
             <form method="POST" action="{{ url_for('rent4u.add_car') }}" enctype="multipart/form-data" role="form">
                 {{ form.hidden_tag() }}
-                <div class="mb-3">{{ form.type.label(class="form-label") }}:{{ form.type(class="form-select") }}</div>
+                <div class="mb-3">{{ form.type.label(class="form-label") }}:{{ form.type(class="form-control") }}</div>
                 <div class="mb-3">{{ form.transmission.label(class="form-label") }}:{{ form.transmission(class="form-select") }}</div>
                 <div class="mb-3">{{ form.seats.label(class="form-label") }}:{{ form.seats(class="form-control") }}</div>
                 <div class="mb-3">{{ form.doors.label(class="form-label") }}:{{ form.doors(class="form-control") }}</div>
@@ -14,14 +14,15 @@
                 <div class="mb-3">{{ form.brand.label(class="form-label") }}:{{ form.brand(class="form-control") }}</div>
                 <div class="mb-3">{{ form.model.label(class="form-label") }}:{{ form.model(class="form-control") }}</div>
                 
-                <!-- <div class="mb-3">{{ form.year.label(class="form-label") }}:{{ form.year(class="form-control") }}</div>
+                
+                {#<div class="mb-3">{{ form.year.label(class="form-label") }}:{{ form.year(class="form-control") }}</div>
                 <div class="mb-3">{{ form.color.label(class="form-label") }}:{{ form.color(class="form-control") }}</div>
-                <div class="mb-3">{{ form.license_plate.label(class="form-label") }}:{{ form.license_plate(class="form-control") }}</div> -->
+                <div class="mb-3">{{ form.license_plate.label(class="form-label") }}:{{ form.license_plate(class="form-control") }}</div>#}
 
                 <div class="mb-3">{{ form.availability.label(class="form-label") }}:{{ form.availability(class="form-select") }}</div>
-                <div class="mb-3">{{ form.current_location.label(class="form-label") }}:{{ form.current_location(class="form-control") }}</div>
+                {#<div class="mb-3">{{ form.current_location.label(class="form-label") }}:{{ form.current_location(class="form-control") }}</div>#}
                 <div class="mb-3">{{ form.rental_rate.label(class="form-label") }}:{{ form.rental_rate(class="form-control") }}</div>
-                <div class="mb-3">{{ form.description.label(class="form-label") }}:{{ form.description(class="form-control") }}</div>
+                {#<div class="mb-3">{{ form.description.label(class="form-label") }}:{{ form.description(class="form-control") }}</div>#}
                 <div class="mb-3">{{ form.image.label(class="form-label") }}:{{ form.image(class="form-control") }}</div>
 
                 <button type="submit" class="btn background_color">Submit</button>

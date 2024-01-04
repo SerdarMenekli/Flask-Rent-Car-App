@@ -33,10 +33,47 @@ from werkzeug.utils import secure_filename
 
 @rent4u.route('/search', methods=['GET'])
 def search():
-    form = SearchForm()
+    form = SearchForm(request.args)
     if form.validate_on_submit():
         print("AAAAA")
-    cars=Car.query.all()
+    # cars=Car.query.all()
+    #products = Product.query.paginate(page=page, per_page=5).items
+    
+    query = Car.query
+
+    # Filter based on Type
+    car_type = request.args.get('type')
+    if car_type:
+        if not car_type=="any":
+            query = query.filter(Car.type == car_type)
+
+    # Filter based on Transmission
+    transmission = request.args.get('transmission')
+    if transmission:
+        if transmission != "both":
+            query = query.filter(Car.transmission == transmission)
+
+    # # Filter based on Number of Seats
+    seats = request.args.get('seats')
+    if seats:
+        query = query.filter(Car.seats >= seats)
+
+    # # Filter based on Luggage Capacity
+    luggage = request.args.get('luggage')
+    if luggage:
+        query = query.filter(Car.luggage >= luggage)
+
+    # # Filter based on Price Range
+    min_price = request.args.get('min_price')
+    max_price = request.args.get('max_price')
+    if min_price and max_price:
+        query = query.filter(Car.rental_rate.between(min_price, max_price))
+
+    
+    
+    page = request.args.get('page', 1, type=int)
+    cars = query.paginate(page=page, per_page=10)
+    # print(page)
     return render_template('search.html',form=form, cars=cars)
     # return redirect(url_for('rent4u.index'))
 
@@ -59,13 +96,15 @@ def add_car():
             seats=form.seats.data,
             brand=form.brand.data,
             model=form.model.data,
-            year=form.year.data,
-            color=form.color.data,
-            license_plate=form.license_plate.data,
+            doors=form.doors.data,
+            luggage=form.luggage.data,
+            # year=form.year.data,
+            # color=form.color.data,
+            # license_plate=form.license_plate.data,
             availability= form.availability.data == 'available',
-            current_location=form.current_location.data,
+            # current_location=form.current_location.data,
             rental_rate=form.rental_rate.data,
-            description=form.description.data,
+            # description=form.description.data,
             image_filename=filename if form.image.data else None
         )
 
