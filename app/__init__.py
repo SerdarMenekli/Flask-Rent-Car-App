@@ -29,9 +29,9 @@ login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
 
-from app.auth import AdminModelView, MyAdminIndexView, UserModelView, CustomerModelView, CarModelView, ReservationAdminView
+from app.auth import AdminModelView, MyAdminIndexView, UserModelView, CustomerModelView, CarModelView, ReservationAdminView, ContactAdminView
 from app.auth.models import User
-from app.rent4u.models import Customer, Car, Location, Reservation
+from app.rent4u.models import Customer, Car, Location, Reservation, Contact
     
 admin = Admin(app, name='Admin Panel', template_mode='bootstrap4', index_view=MyAdminIndexView())
 admin.add_view(UserModelView(User, db.session))
@@ -39,6 +39,7 @@ admin.add_view(CustomerModelView(Customer, db.session))
 admin.add_view(CarModelView(Car, db.session))
 admin.add_view(AdminModelView(Location, db.session))
 admin.add_view(ReservationAdminView(Reservation, db.session))
+admin.add_view(ContactAdminView(Contact, db.session))
 # admin.add_view(ModelView(Invoice, db.session))
 
 

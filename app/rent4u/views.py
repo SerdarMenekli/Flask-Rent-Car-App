@@ -1,7 +1,10 @@
 import os
 from flask import Blueprint, flash, redirect,render_template, request, send_from_directory, url_for
 from flask_login import current_user, login_required
+from werkzeug.utils import secure_filename
 
+from app import ALLOWED_EXTENSIONS, db, app
+from app.rent4u.models import Car, CarForm, Contact, ContactForm, Reservation, ReservationForm, SearchForm, Customer
 from app.auth.views import admin_required
 
 rent4u = Blueprint('rent4u', __name__)
@@ -28,13 +31,25 @@ def blog():
 def car():
     return render_template('car.html')
 
-@rent4u.route('/contact')
+@rent4u.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    form = ContactForm()
 
-from app import ALLOWED_EXTENSIONS, db, app
-from app.rent4u.models import Car, CarForm, Reservation, ReservationForm, SearchForm, Customer
-from werkzeug.utils import secure_filename
+    if form.validate_on_submit():
+        new_contact = Contact(
+            name=form.name.data,
+            phone=form.phone.data,
+            email=form.email.data,
+            message=form.message.data
+        )
+
+        db.session.add(new_contact)
+        db.session.commit()
+
+        flash('Your message has been submitted!', 'success')
+        return redirect(url_for('rent4u.contact'))
+
+    return render_template('contact.html', form=form)
 
 @rent4u.route('/search', methods=['GET'])
 def search():

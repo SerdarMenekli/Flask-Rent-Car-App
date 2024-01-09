@@ -2,9 +2,9 @@ from datetime import datetime
 
 from app import db, app
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField, FloatField, DateField
+from wtforms import StringField, IntegerField, SelectField, FloatField, DateField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, NumberRange, Email
 class Customer(db.Model):
     __tablename__ = 'customer'
 
@@ -236,3 +236,24 @@ class ReservationForm(FlaskForm):
     pick_up_date = DateField('Pick Up Date')
     return_date = DateField('Return Date')
     
+class Contact(db.Model):
+    __tablename__ = 'contacts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    phone = db.Column(db.String(15))
+    email = db.Column(db.String(255), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __init__(self, name, phone, email, message):
+        self.name = name
+        self.phone = phone
+        self.email = email
+        self.message = message
+        
+class ContactForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    phone = StringField('Phone')
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    message = TextAreaField('Message', validators=[DataRequired()])

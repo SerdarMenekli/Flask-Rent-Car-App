@@ -80,3 +80,8 @@ class ReservationAdminView(AdminModelView):
         'created_at': 'Created At',
         'updated_at': 'Updated At',
     }
+    
+class ContactAdminView(AdminModelView):
+    column_list = ('name', 'phone', 'email', 'message', 'created_at')
+    column_searchable_list = ('name', 'email')
+    column_filters = ('created_at',)
