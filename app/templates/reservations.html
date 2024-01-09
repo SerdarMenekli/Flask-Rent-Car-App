@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="w-75 mx-auto p-2"> 
+        <h1>Reservations</h1>
+        {% if reservations %}
+            <table class="table border-1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Car</th>
+                        <th>Pick Up Date</th>
+                        <th>Return Date</th>
+                        <th>Pick Up Location</th>
+                        <th>Return Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.id }}</td>
+                            <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
+                            <td>{{ reservation.pick_up_date }}</td>
+                            <td>{{ reservation.return_date }}</td>
+                            <td>{{ reservation.pick_up_location }}</td>
+                            <td>{{ reservation.return_location }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No reservations found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

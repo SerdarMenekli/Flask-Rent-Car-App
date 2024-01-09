@@ -3,20 +3,41 @@
 {% block content %}
     <div class="container col-md-8 mt-5">
         <form method="GET" action="{{ url_for('rent4u.search') }}" role="form" >
-            <div class="row">
-                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.type.label(class="form-label") }}{{ form.type(class="form-select") }}</div>
-                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.transmission.label(class="form-label") }}{{ form.transmission(class="form-select") }}</div>
-                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.seats.label(class="form-label") }}{{ form.seats(class="form-control") }}</div>
-                <div class="mb-3 col-sm-2 d-flex flex-column justify-content-end">{{ form.luggage.label(class="form-label") }}{{ form.luggage(class="form-control") }}</div>
-                <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_min.label(class="form-label") }}{{ form.rental_rate_min(class="form-control") }}</div>
-                <div class="mb-3 col-sm-1 d-flex flex-column justify-content-end">{{ form.rental_rate_max.label(class="form-label") }}{{ form.rental_rate_max(class="form-control") }}</div>
+            <div class="row align-items-end mb-3">
+                <!-- <div class="col-md-2">
+                    <label for="parkingName">Pick Up Locaion</label>
+                    <input type="text" class="form-control" id="pick_up_location" name="pick_up_location" value="{{ form.pick_up_location.value }}">
+                </div>
+                <div class="col-md-2">
+                    <label for="parkingNumber">Drop Location</label>
+                    <input type="text" class="form-control" id="return_location" name="return_location" value="{{ form.return_location.value }}">
+                  </div>
+                <div class="col-md-2">
+                    <label for="parkingName">Pick Up Date</label>
+                    <input type="date" class="form-control" id="pick_up_date" name="pick_up_date" value="{{ form.pick_up_date.value }}">
+                  </div>
+                <div class="col-md-2">
+                    <label for="parkingNumber">Return Date</label>
+                    <input type="date" class="form-control" id="return_date" name="return_date" value="{{ form.return_date.value }}">
+                </div> -->
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.pick_up_location.label(class="form-label") }}{{ form.pick_up_location(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.return_location.label(class="form-label") }}{{ form.return_location(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.pick_up_date.label(class="form-label") }}{{ form.pick_up_date(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.return_date.label(class="form-label") }}{{ form.return_date(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.sort_by.label(class="form-label") }}{{ form.sort_by(class="form-select") }}</div>
+                <div class="col-md-2"><button type="submit" class="btn background_color w-100">Submit</button></div>
             </div>
-            <div class="row">
-                <div class="mb-3 col-sm-2 d-flex align-items-end float-right"><button type="submit" class="btn background_color">Submit</button></div>
+            <div class="row mb-3">
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.type.label(class="form-label") }}{{ form.type(class="form-select") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.transmission.label(class="form-label") }}{{ form.transmission(class="form-select") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.seats.label(class="form-label") }}{{ form.seats(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.luggage.label(class="form-label") }}{{ form.luggage(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.rental_rate_min.label(class="form-label") }}{{ form.rental_rate_min(class="form-control") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.rental_rate_max.label(class="form-label") }}{{ form.rental_rate_max(class="form-control") }}</div>
             </div>
             
         </form>
-        <div>total of {{cars.total}}  results</div>
+        <div>total of {{cars.total}} results</div>
         {% for car in cars.items %}
                 <div class="card mb-3">
                     <div class="row g-0">
@@ -27,24 +48,46 @@
                                 <img src="" class="img-fluid rounded" alt="Placeholder Image">
                             {% endif %}
                         </div>
-                        <div class="card-body col-md-4">
-                            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
-                            <p class="card-text"><strong>Type:</strong> {{ car.type }}</p>
-                            <p class="card-text"><strong>Transmission:</strong> {{ car.transmission }}</p>
-                            <p class="card-text"><strong>Seats:</strong> {{ car.seats }}</p>
+                        <div class="col-md-8 row g-0">
+                            <h5 class="card-title m-2">{{ car.brand }} {{ car.model }}</h5>
+                            <div class="card-body col-md-6">
+                                <p class="card-text"><strong>Type:</strong> {{ car.type }}</p>
+                                <p class="card-text"><strong>Transmission:</strong> {{ car.transmission }}</p>
+                                <p class="card-text"><strong>Seats:</strong> {{ car.seats }}</p>
+                                
+                            </div>
+                            <div class="card-body col-md-6 d-flex flex-column">
+                                <div class="align-self-start">
+                                    <p class="card-text"><strong>Doors:</strong> {{ car.doors }}</p>
+                                    <p class="card-text"><strong>Luggage Capacity:</strong> {{ car.luggage }}</p>
+                                    <!-- <p class="card-text"><strong>Availability:</strong> {{ "Available" if car.availability else "Unavailable" }}</p> -->
+                                    <!-- <p class="card-text"><strong>Current Location:</strong> {{ car.current_location }}</p> -->
+                                    <p class="card-text"><strong>Rental Rate per Day:</strong> ${{ car.rental_rate }}</p>
+                                    <!-- <p class="card-text"><strong>Description:</strong> {{ car.description }}</p> -->
+                                </div>
                             
-                        </div>
-                        <div class="card-body col-md-4">
-                            <p class="card-text"><strong>Doors:</strong> {{ car.doors }}</p>
-                            <p class="card-text"><strong>Luggage Capacity:</strong> {{ car.luggage }}</p>
-                            <p class="card-text"><strong>Availability:</strong> {{ "Available" if car.availability else "Unavailable" }}</p>
-                            <!-- <p class="card-text"><strong>Current Location:</strong> {{ car.current_location }}</p> -->
-                            <p class="card-text"><strong>Rental Rate per Day:</strong> ${{ car.rental_rate }}</p>
-                            <!-- <p class="card-text"><strong>Description:</strong> {{ car.description }}</p> -->
+                                <div class="flex-grow-1"></div>
+                            
+                                <div class="align-self-end w-50 card-text">
+                                    <a href="{{ url_for('rent4u.reservation', car_id=car.id, pick_up_date=request.args.get('pick_up_date'), return_date=request.args.get('return_date'), pick_up_location=request.args.get('pick_up_location'), return_location=request.args.get('return_location')) }}" class="btn background_color w-100 mt-2">Select</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            
+                
+                <!-- <script>
+                    var currentDate = new Date();
+                  
+                    var pickUpDateInput = document.getElementById('pickUpDate');
+                    pickUpDateInput.value = currentDate.toISOString().split('T')[0];
+              
+                    var returnDate = new Date(currentDate);
+                    returnDate.setDate(currentDate.getDate() + 7);
+                    var returnDateInput = document.getElementById('returnDate');
+                    returnDateInput.value = returnDate.toISOString().split('T')[0];
+                  
+                </script> -->
         {% endfor %}
 
         {#{% if cars.has_prev %} 
@@ -79,7 +122,6 @@
                 <a href="{{ url_for(request.endpoint, **args) }}" class="btn background_color">&gt;</a>
 
             {% endif %}
-        </div>
-        
+        </div>   
     </div>
 {% endblock content %}

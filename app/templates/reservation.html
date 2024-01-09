@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container col-md-8 mt-5">
+        <form method="POST" action="{{ url_for('rent4u.reservation') }}" role="form" >
+            <div class="row align-items-end mb-3">
+                {{ form.csrf_token }}
+                <input type="hidden" name="car_id" value="{{ car.id }}">
+                {# <div class="col-md-2">
+                    <label for="parkingName">Pick Up Locaion</label>
+                    <input type="text" class="form-control" id="pick_up_location" name="pick_up_location" value="Paris">
+                </div>
+                <div class="col-md-2">
+                    <label for="parkingNumber">Drop Location</label>
+                    <input type="text" class="form-control" id="return_location" name="return_location" value="Orleans">
+                  </div>
+                <div class="col-md-2">
+                    <label for="parkingName">Pick Up Date</label>
+                    <input type="date" class="form-control" id="pick_up_date" name="pick_up_date" value="2023-12-20">
+                  </div>
+                <div class="col-md-2">
+                    <label for="parkingNumber">Return Date</label>
+                    <input type="date" class="form-control" id="return_date" name="return_date" value="2023-12-27">
+                </div> #}
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.pick_up_location.label(class="form-label") }}{{ form.pick_up_location(class="form-control", readonly="readonly") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.return_location.label(class="form-label") }}{{ form.return_location(class="form-control", readonly="readonly") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.pick_up_date.label(class="form-label") }}{{ form.pick_up_date(class="form-control", readonly="readonly") }}</div>
+                <div class="col-sm-2 d-flex flex-column justify-content-end">{{ form.return_date.label(class="form-label") }}{{ form.return_date(class="form-control", readonly="readonly") }}</div>
+                {% if not done %}
+                    <div class="col-md-2"><button type="submit" class="btn background_color w-100">Confirm</button></div>
+                {% endif %}
+                
+            </div>
+        </form>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="card-body col-md-4 text-center">
+                            {% if car.image_filename %}
+                                <img src="{{ url_for('rent4u.car_image', filename=car.image_filename) }}" class="img-fluid rounded" alt="Car Image" style="object-fit: contain; height: 100%">
+                            {% else %}
+                                <img src="" class="img-fluid rounded" alt="Placeholder Image">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8 row g-0">
+                            <h5 class="card-title m-2">{{ car.brand }} {{ car.model }}</h5>
+                            <div class="card-body col-md-6">
+                                <p class="card-text"><strong>Type:</strong> {{ car.type }}</p>
+                                <p class="card-text"><strong>Transmission:</strong> {{ car.transmission }}</p>
+                                <p class="card-text"><strong>Seats:</strong> {{ car.seats }}</p>
+                                
+                            </div>
+                            <div class="card-body col-md-6 d-flex flex-column">
+                                <div class="align-self-start">
+                                    <p class="card-text"><strong>Doors:</strong> {{ car.doors }}</p>
+                                    <p class="card-text"><strong>Luggage Capacity:</strong> {{ car.luggage }}</p>
+                                    <!-- <p class="card-text"><strong>Availability:</strong> {{ "Available" if car.availability else "Unavailable" }}</p> -->
+                                    <!-- <p class="card-text"><strong>Current Location:</strong> {{ car.current_location }}</p> -->
+                                    <p class="card-text"><strong>Rental Rate per Day:</strong> ${{ car.rental_rate }}</p>
+                                    <!-- <p class="card-text"><strong>Description:</strong> {{ car.description }}</p> -->
+                                </div>
+                            
+                                <div class="flex-grow-1"></div>
+                            
+                                {# <div class="align-self-end w-50 card-text">
+                                    <a href="{{ url_for('rent4u.reservation', car_id=car.id, pickUpDate=request.args.get('pickUpDate'), returnDate=request.args.get('returnDate'), pickUpLocation=request.args.get('pickUpLocation'), returnLocation=request.args.get('returnLocation')) }}" class="btn background_color w-100 mt-2">Select</a>
+                                </div> #}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if done %}
+                    <div>
+                        <a href="{{ url_for('rent4u.index') }}" class="btn background_color btn-large">Return to Home Page</a>
+                    </div>
+                {% endif %}
+                
+    </div>
+{% endblock content %}

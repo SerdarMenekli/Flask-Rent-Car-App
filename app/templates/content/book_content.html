@@ -6,21 +6,21 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="parkingName">Pick Up Locaion</label>
-                <input type="text" class="form-control" placeholder="Paris ">
+                <input type="text" class="form-control" name="pick_up_location" value="Paris">
               </div>
               <div class="col-md-6">
                 <label for="parkingNumber">Drop Location</label>
-                <input type="text" class="form-control" placeholder="Orleans ">
+                <input type="text" class="form-control" name="return_location" value="Orleans">
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6">
                 <label for="parkingName">Pick Up Date</label>
-                <input type="date" class="form-control" id="pickUpDate" value="2023-12-20">
+                <input type="date" class="form-control" name="pick_up_date" id="pick_up_date" value="2023-12-20">
               </div>
               <div class="col-md-6">
                 <label for="parkingNumber">Return Date</label>
-                <input type="date" class="form-control" id="returnDate" value="2023-12-27">
+                <input type="date" class="form-control" name="return_date" id="return_date" value="2023-12-27">
               </div>
             </div>
           </div>
@@ -32,7 +32,6 @@
             </div>
           </div>
         </div>
-
       </form>
     </div>
     
@@ -43,12 +42,12 @@
     <script>
       var currentDate = new Date();
     
-      var pickUpDateInput = document.getElementById('pickUpDate');
+      var pickUpDateInput = document.getElementById('pick_up_date');
       pickUpDateInput.value = currentDate.toISOString().split('T')[0];
 
       var returnDate = new Date(currentDate);
       returnDate.setDate(currentDate.getDate() + 7);
-      var returnDateInput = document.getElementById('returnDate');
+      var returnDateInput = document.getElementById('return_date');
       returnDateInput.value = returnDate.toISOString().split('T')[0];
     </script>
   </section>

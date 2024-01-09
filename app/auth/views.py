@@ -1,4 +1,5 @@
-from flask import request, render_template, flash, redirect, url_for, session, Blueprint
+from functools import wraps
+from flask import abort, request, render_template, flash, redirect, url_for, session, Blueprint
 from app import db
 from app.auth.models import User, RegistrationForm, LoginForm, ManageAccountForm, ManagePersonalForm
 from app.rent4u.models import Customer
@@ -15,6 +16,17 @@ def load_user(id):
 @auth.before_request
 def get_current_user():
     g.user = current_user
+
+def admin_required(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        # Check if the current user is an admin (you need to implement this logic)
+        if not current_user.admin:
+            abort(403)  # Forbidden
+
+        return func(*args, **kwargs)
+
+    return decorated_view
 
 @auth.route("/register", methods=["GET", "POST"])
 def register():
@@ -65,7 +77,7 @@ def login():
             flash("Invalid username or password. Please try again.", "danger")
             return render_template("login.html", form=form)
         login_user(existing_user)
-        flash("You have successfully logged in.", "success")
+        # flash("You have successfully logged in.", "success")
         return redirect(url_for("rent4u.index"))
 
     if form.errors:

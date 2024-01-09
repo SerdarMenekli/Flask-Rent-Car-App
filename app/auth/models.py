@@ -71,3 +71,4 @@ class ManagePersonalForm(FlaskForm):
     phone_number = StringField('Phone Number')
     address = StringField('Address')
     date_of_birth = DateField('Date of Birth', format='%Y-%m-%d', validators=[DataRequired()])
+    

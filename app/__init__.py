@@ -29,21 +29,17 @@ login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
 
-
-admin = Admin(app, name='Admin Panel', template_mode='bootstrap4')
-# class UserAdminView(ModelView):
-#     column_exclude_list = ['pwdhash']
-    
-from app.auth import UserModelView, CustomerModelView, CarModelView
+from app.auth import AdminModelView, MyAdminIndexView, UserModelView, CustomerModelView, CarModelView, ReservationAdminView
 from app.auth.models import User
-from app.rent4u.models import Customer, Car, Rental, Location, Reservation, Invoice
+from app.rent4u.models import Customer, Car, Location, Reservation
+    
+admin = Admin(app, name='Admin Panel', template_mode='bootstrap4', index_view=MyAdminIndexView())
 admin.add_view(UserModelView(User, db.session))
 admin.add_view(CustomerModelView(Customer, db.session))
 admin.add_view(CarModelView(Car, db.session))
-admin.add_view(ModelView(Rental, db.session))
-admin.add_view(ModelView(Location, db.session))
-admin.add_view(ModelView(Reservation, db.session))
-admin.add_view(ModelView(Invoice, db.session))
+admin.add_view(AdminModelView(Location, db.session))
+admin.add_view(ReservationAdminView(Reservation, db.session))
+# admin.add_view(ModelView(Invoice, db.session))
 
 
 from app.auth.views import auth
@@ -56,6 +52,8 @@ ctx = app.app_context()
 
 ctx.push()
 from app.auth.models import User
-from app.rent4u.models import Car, Rental, Location, Reservation, Invoice
+from app.rent4u.models import Car, Location, Reservation
+# Reservation.__table__.drop(db.engine)
 db.create_all()
+# Invoice.__table__.drop(db.engine)
 ctx.pop()
