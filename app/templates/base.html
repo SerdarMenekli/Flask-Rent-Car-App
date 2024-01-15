@@ -31,16 +31,18 @@
 
 <body {% if not is_home_page %}class="sub_page"{% endif %}>
     {% include "header.html" %}
+    {% if not is_home_page %}
+      <div> 
+          {% for category, message in get_flashed_messages(with_categories=true) %} 
+              <br/> 
+              <div class="alert alert-{{category}} alert-dismissable fade show" role="alert"> 
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+                  {{ message }} 
+              </div> 
+          {% endfor %} 
+      </div>
+    {% endif %}
     
-    <div> 
-        {% for category, message in get_flashed_messages(with_categories=true) %} 
-            <br/> 
-            <div class="alert alert-{{category}} alert-dismissable fade show" role="alert"> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
-                {{ message }} 
-            </div> 
-        {% endfor %} 
-    </div>
     <div class="content">
     {% block content %}{% endblock %}
     </div>
